@@ -48,7 +48,7 @@ jobs:
           echo $ANDROID_SDK_ROOT
           echo
           echo 6. What is the workspace Location
-          echo $RUNNER WORKSPACE
+          echo $RUNNER_WORKSPACE
           echo
           echo 7. Who is running the script
           whoami
