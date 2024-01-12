@@ -58,8 +58,20 @@ jobs:
           fi
           # Verify Rails installation
           rails --version
+          if ! command -v flutter > /dev/null 2>&1;
+          then
+          echo "flutter not found. Installing ...."
+          git clone https://github.com/flutter/flutter.git -b stable --depth 1
+          export PATH="$PATH:`pwd`/flutter/bin"
           flutter --version
-          if ! command -v dart >/dev/null 2>&1;
+          flutter precache
+          else
+          echo "flutter is already installed"
+          fi
+          
+          flutter --version
+          dart --version
+          if ! command -v dart > /dev/null 2>&1;
           then
           echo "dart not found. Installing ..."
           mkdir -p $HOME/dart
