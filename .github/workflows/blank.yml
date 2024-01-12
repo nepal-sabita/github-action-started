@@ -32,11 +32,32 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-          echo what is in the directory?
+          echo 1. what is in the directory?
           ls -a
-          echo Is git installed?
+          echo 2. Is git installed?
           git --version
+          echo
+          echo 4. Which build installed?
+          gradle --version
+          ruby --version
+          rails --version
+          dart --version
+          flutter --version
+          echo
+          echo 5. Where is Android SDK Root
+          echo $ANDROID_SDK_ROOT
+          echo
+          echo 6. What is the workspace Location
+          echo $RUNNER WORKSPACE
+          echo
+          echo 7. Who is running the script
+          whoami
+          echo 8. How is the disc laid out
+          df
+          echo 9. What environment variables are available
+          env
+          
+          
+          
           
           
