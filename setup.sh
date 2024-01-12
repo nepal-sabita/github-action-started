@@ -38,3 +38,11 @@ cd jadibuti-api
 
 # Installing dependencies
 bundle install --gemfile ~/jadibuti-api/Gemfile
+
+# Run database migrations and seed
+bin/rails db:migrate
+bin/rails db:seed
+
+# Starting the Rails server
+rails server
+
