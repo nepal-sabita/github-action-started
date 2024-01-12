@@ -35,6 +35,7 @@ sudo -u postgres psql -d washing_solution_api_test -c "GRANT ALL PRIVILEGES ON D
 # Cloning the repository
 git clone git@github.com:Shatkon/jadibuti-api.git
 cd jadibuti-api
+ls
 
 # Installing dependencies
 bundle install --gemfile ~/jadibuti-api/Gemfile
@@ -44,5 +45,5 @@ bin/rails db:migrate
 bin/rails db:seed
 
 # Starting the Rails server
-rails server
+bin/rails server
 
