@@ -40,7 +40,6 @@ jobs:
           echo 4. Which build installed?
           gradle --version
           ruby --version
-          rails --version
           dart --version
           flutter --version
           echo
