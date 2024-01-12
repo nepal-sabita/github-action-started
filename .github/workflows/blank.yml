@@ -50,6 +50,8 @@ jobs:
           ruby --version
           if ! gem list -i "^rails$" > /dev/null 2>&1; then
             echo "Rails not found. Installing..."
+            export GEM_HOME=$HOME/gems
+            export PATH=$GEM_HOME/bin:$PATH
             gem install rails
           else
             echo "Rails is already installed."
