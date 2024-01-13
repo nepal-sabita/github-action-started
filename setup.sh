@@ -1,49 +1,66 @@
 #!/bin/sh
 
-# Update package list and install required dependencies
-sudo apt update
-sudo apt install git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev
-
-# Installing rbenv
-curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
-export RBENV_ROOT="$HOME/.rbenv"
-export PATH="$RBENV_ROOT/bin:$PATH"
-eval "$(rbenv init -)"
-
-# Ruby installation
-rbenv install -l
-export RBENV_VERSION=2.7.7
-rbenv install $RBENV_VERSION
-rbenv global $RBENV_VERSION
-ruby -v
-
-# Installation of Bundler and Rails
-gem install bundler --user-install
-gem install rails -v '7.0.8'
-
-# Installation of PostgreSQL
-sudo apt install postgresql postgresql-contrib
-
-# Creating a PostgreSQL user and database
-sudo -u postgres createuser --no-superuser --no-createrole sabu
-sudo -u postgres createdb --owner=sabu washing_solution_api_test
-sudo -u postgres psql -d washing_solution_api_test -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO sabu;"
-sudo -u postgres psql -d washing_solution_api_test -c "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO sabu;"
-sudo -u postgres psql -d washing_solution_api_test -c "GRANT ALL PRIVILEGES ON DATABASE washing_solution_api_test TO sabu;"
-
-
-# Cloning the repository
-git clone git@github.com:Shatkon/jadibuti-api.git
-cd jadibuti-api
-ls
-
-# Installing dependencies
-bundle install --gemfile ~/jadibuti-api/Gemfile
-
-# Run database migrations and seed
-bin/rails db:migrate
-bin/rails db:seed
-
-# Starting the Rails server
-bin/rails server
-
+#Update package list and install required dependencies
+echo
+          echo 4. Which build installed?
+          gradle --version
+          if [["$(ruby --version)"!= *"2.7.7"*]];
+          then
+          echo "Ruby version is not found. Installing...."
+          rbenv install 2.7.7
+          rbenv global 2.7.7
+          else
+          echo "ruby version 2.7.7 is already installed"
+          fi
+          ruby --version
+          if ! gem list -i "^rails$" > /dev/null 2>&1; then
+            echo "Rails not found. Installing..."
+            export GEM_HOME=$HOME/gems
+            export PATH=$GEM_HOME/bin:$PATH
+            gem install rails
+          else
+            echo "Rails is already installed."
+          fi
+          # Verify Rails installation
+          rails --version
+          if ! command -v flutter > /dev/null 2>&1;
+          then
+          echo "flutter not found. Installing ...."
+          git clone https://github.com/flutter/flutter.git -b stable --depth 1
+          export PATH="$PATH:`pwd`/flutter/bin"
+          flutter --version
+          flutter precache
+          else
+          echo "flutter is already installed"
+          fi
+          
+          flutter --version
+          dart --version
+          if ! command -v dart > /dev/null 2>&1;
+          then
+          echo "dart not found. Installing ..."
+          mkdir -p $HOME/dart
+            curl -fsSL https://dart.dev/get/dart.zip -o dart.zip
+            unzip dart.zip -d $HOME/dart
+            export PATH="$PATH:$HOME/dart/dart-sdk/bin"
+            else
+            echo "dart is already installed"
+            fi
+            dart --version
+          echo 5. Where is Android SDK Root
+          echo $ANDROID_SDK_ROOT
+          echo
+          echo 6. What is the workspace Location
+          echo $RUNNER_WORKSPACE
+          echo
+          echo 7. Who is running the script
+          whoami
+          echo 8. How is the disc laid out
+          df
+          echo 9. What environment variables are available
+          env
+          
+          
+          
+          
+          
