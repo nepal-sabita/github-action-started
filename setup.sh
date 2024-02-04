@@ -45,11 +45,3 @@ if ! dpkg -l | grep -q postgresql; then
     echo "postgresql already install"
 fi
 psql --version
-# sudo apt install postgresql postgresql-contrib libpq-dev
-
-# Creating a PostgreSQL user and database
-sudo -u postgres createuser --no-superuser --no-createrole --createdb $USER
-sudo -u postgres createdb --owner=$USER DummyDb
-sudo -u postgres psql -d DummyDb -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO $USER;"
-sudo -u postgres psql -d DummyDb -c "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO $USER;"
-sudo -u postgres psql -d DummyDb -c "ALTER USER $USER WITH CREATEDB;"
