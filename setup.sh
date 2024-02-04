@@ -16,7 +16,7 @@ if ! command -v rbenv &> /dev/null;
           else
           echo "rbenv is already installed"
           fi
-
+rbenv --version
 # Ruby installation
 if [["$(ruby --version)"!= *"2.7.7"*]];
           then
